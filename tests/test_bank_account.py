@@ -1,4 +1,6 @@
 """Test para la clase BankAccount"""
+
+import os
 import unittest
 
 from src.bank_account import BankAccount
@@ -8,8 +10,12 @@ class BankAccountTests(unittest.TestCase):
     """Clase para los tests de BankAccount"""
 
     def setUp(self) -> None:
-        self.account_a = BankAccount(balance=3000)
+        self.account_a = BankAccount(balance=3000, log_file='./Log/transaction_log.txt')
         self.account_b = BankAccount(balance=0)
+
+    def tearDown(self) -> None:
+        if os.path.exists(self.account_a.log_file):
+            os.remove(self.account_a.log_file)
 
     def test_deposit(self):
         """Test de deposito en cuenta bancaria"""
@@ -66,3 +72,7 @@ class BankAccountTests(unittest.TestCase):
         self.assertEqual(
             str(context.exception), "No hay saldo disponible en la cuenta."
         )
+
+    def test_transaction_log(self):
+        """Test de generación del log"""
+        assert os.path.exists(self.account_a.log_file)
