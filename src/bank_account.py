@@ -17,7 +17,7 @@ class BankAccount:
         """
 
         caller_method = inspect.currentframe().f_back.f_code.co_name
-        
+
         if self.log_file:
             with open(self.log_file, 'a', encoding='utf-8') as file:
                 file.write(f'{message} - ({caller_method})\n')

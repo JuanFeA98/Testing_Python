@@ -23,3 +23,8 @@ class AllAssertsTest(unittest.TestCase):
         """Validación de que un elemento exista o no"""
         self.assertIn(13, [1, 2, 3, 13])
         self.assertNotIn(10, [1, 2, 3, 13])
+
+    @unittest.skip('En pruebas')
+    def test_skip(self):
+        """Validación de prueba"""
+        self.assertEqual('Hola', 'Mundo')
